@@ -20,9 +20,6 @@ Dataset gốc: [Heart Disease (UCI Machine Learning Repository)](https://archive
 ---
 
 ## 🎯 1. Giới thiệu bài toán
-
-[#-1-giới-thiệu-bài-toán](#-1-giới-thiệu-bài-toán)
-
 Dự án xây dựng một pipeline Machine Learning hoàn chỉnh (đọc dữ liệu → tiền xử lý → huấn luyện → đánh giá → demo) để giải quyết bài toán **phân loại nhị phân**: dự đoán một bệnh nhân có mắc bệnh tim mạch hay không, dựa trên 13 chỉ số lâm sàng (tuổi, huyết áp, cholesterol, kết quả điện tâm đồ, xạ hình tưới máu cơ tim...). Dự án gồm 3 phần theo đúng yêu cầu đề bài:
 
 - **Bài 1**: huấn luyện & so sánh 4 mô hình phân loại khác nhau bằng đầy đủ bộ chỉ số (accuracy, precision/recall/f1 theo từng lớp, weighted-F1, thời gian train/test).
@@ -32,9 +29,6 @@ Dự án xây dựng một pipeline Machine Learning hoàn chỉnh (đọc dữ 
 ---
 
 ## ⚙️ 2. Công nghệ sử dụng
-
-[#️-2-công-nghệ-sử-dụng](#️-2-công-nghệ-sử-dụng)
-
 - **Ngôn ngữ:** Python > 3.10
 - **Machine Learning:** scikit-learn (`Pipeline`, `ColumnTransformer`, `LogisticRegression`, `RandomForestClassifier`, `SVC`, `KNeighborsClassifier`, `LinearRegression`)
 - **Xử lý & phân tích dữ liệu:** pandas, numpy
@@ -44,8 +38,6 @@ Dự án xây dựng một pipeline Machine Learning hoàn chỉnh (đọc dữ 
 ---
 
 ## 📁 3. Cấu trúc thư mục
-
-[#-3-cấu-trúc-thư-mục](#-3-cấu-trúc-thư-mục)
 
 ```
 heart_disease_ml/
@@ -68,8 +60,6 @@ heart_disease_ml/
 
 ## 📊 4. Insight từ khám phá dữ liệu (EDA)
 
-[#-4-insight-từ-khám-phá-dữ-liệu-eda](#-4-insight-từ-khám-phá-dữ-liệu-eda)
-
 Sau khi làm sạch dữ liệu (điền missing value ở `ca`/`thal` bằng median/mode, ép kiểu numeric/categorical, nhị phân hoá nhãn gốc `num` 0–4 thành `target` 0/1), bộ dữ liệu có các đặc điểm đáng chú ý sau:
 
 - **Quy mô sạch:** 303/303 dòng còn lại sau xử lý, không mất dữ liệu; tỉ lệ mắc bệnh **45.9%** — khá cân bằng giữa 2 lớp, nên accuracy vẫn là thước đo tham khảo hợp lý, không bị lệch do mất cân bằng lớp nặng.
@@ -87,8 +77,6 @@ Sau khi làm sạch dữ liệu (điền missing value ở `ca`/`thal` bằng me
 ---
 
 ## 🤖 5. Bài 1 — So sánh mô hình phân loại
-
-[#-5-bài-1--so-sánh-mô-hình-phân-loại](#-5-bài-1--so-sánh-mô-hình-phân-loại)
 
 4 mô hình được huấn luyện trên cùng một pipeline tiền xử lý (`train_test_split` 80/20, `stratify` theo nhãn):
 
@@ -114,25 +102,16 @@ Chi tiết theo từng lớp (trích classification report):
 
 ## 🔍 6. Bài 2 — Feature Selection theo Correlation
 
-[#-6-bài-2--feature-selection-theo-correlation](#-6-bài-2--feature-selection-theo-correlation)
-
 Xếp hạng 13 thuộc tính theo trị tuyệt đối hệ số tương quan Pearson với `target`, sau đó huấn luyện **Linear Regression** trên từng tập con (Top-3 / Top-6 / Top-9 / toàn bộ 13) và đo **MAE** trên tập test:
 
-| Tập feature | Số lượng | MAE |
-|---|---|---|
-| Top-3 feature | 3 | 0.2685 |
-| **Top-6 feature** | **6** | **0.2501** |
-| Top-9 feature | 9 | 0.2564 |
-| Tất cả 13 feature | 13 | 0.2677 |
+<img width="710" height="456" alt="image" src="https://github.com/user-attachments/assets/e846f89a-aecf-4d33-9631-a848791649e8" />
+
 
 > **Insight:** Top-6 feature (`thal, ca, exang, oldpeak, thalach, cp`) cho MAE **thấp nhất**, tốt hơn cả khi dùng toàn bộ 13 thuộc tính — nghĩa là **7 thuộc tính còn lại (chol, fbs, restecg, trestbps, age, sex, slope) chủ yếu đóng vai trò nhiễu** đối với bài toán hồi quy này. Đây là minh chứng thực nghiệm rõ ràng cho lợi ích của feature selection: giảm gần một nửa số chiều đầu vào nhưng mô hình vẫn tổng quát hoá tốt hơn — ít tham số hơn, nhanh hơn, và tránh overfit vào các đặc trưng không liên quan.
 
 ---
 
 ## 🏗️ 7. Kiến trúc pipeline & thiết kế xử lý dữ liệu
-
-[#️-7-kiến-trúc-pipeline--thiết-kế-xử-lý-dữ-liệu](#️-7-kiến-trúc-pipeline--thiết-kế-xử-lý-dữ-liệu)
-
 ### 7.1. Luồng tiền xử lý (tránh Data Leakage)
 
 - 6 thuộc tính numeric (`age, trestbps, chol, thalach, oldpeak, ca`) → `SimpleImputer(median)` → `StandardScaler`.
@@ -166,9 +145,6 @@ Dù KNN có accuracy cao nhất trên tập test cố định, ứng dụng demo
 
 ## 🖥️ 8. Ứng dụng demo Streamlit
 
-[#️-8-ứng-dụng-demo-streamlit](#️-8-ứng-dụng-demo-streamlit)
-
-
 | Trang | Nội dung |
 |---|---|
 | 📊 Khám phá dữ liệu | Thống kê tổng quan, phân bố target, phân bố từng thuộc tính theo tình trạng bệnh, insight tự động tính từ dữ liệu thật |
@@ -186,9 +162,6 @@ streamlit run app.py
 ---
 
 ## 🧠 9. Bài học rút ra & hướng phát triển
-
-[#-9-bài-học-rút-ra--hướng-phát-triển](#-9-bài-học-rút-ra--hướng-phát-triển)
-
 **Những gì đã làm được:**
 
 - Xây dựng pipeline ML end-to-end tái sử dụng được (`data_utils.py` dùng chung cho cả 3 script và app), tránh lặp code xử lý dữ liệu.
@@ -207,9 +180,6 @@ streamlit run app.py
 ---
 
 ## 💻 10. Cài đặt & chạy dự án
-
-[#-10-cài-đặt--chạy-dự-án](#-10-cài-đặt--chạy-dự-án)
-
 Yêu cầu Python > 3.10. Khuyến khích tạo virtual environment trước khi cài đặt:
 
 ```bash
