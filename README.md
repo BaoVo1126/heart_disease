@@ -1,4 +1,4 @@
-# 🫀 Heart Disease Risk Prediction — Classification, Feature Selection & Streamlit App
+<img width="707" height="456" alt="image" src="https://github.com/user-attachments/assets/90f91405-eb2a-49e1-9ada-6b6a5fd19133" /># 🫀 Heart Disease Risk Prediction — Classification, Feature Selection & Streamlit App
 
 Dataset gốc: [Heart Disease (UCI Machine Learning Repository)](https://archive.ics.uci.edu/dataset/45/heart+disease) — Cleveland Clinic Foundation, 303 bệnh nhân.
 
@@ -87,7 +87,9 @@ Sau khi làm sạch dữ liệu (điền missing value ở `ca`/`thal` bằng me
 | SVM (RBF kernel) | 90.2% | 0.902 | 0.022 | 0.006 |
 | **K-Nearest Neighbors (k=7)** | **91.8%** | **0.918** | **0.013** | 0.032 |
 
-Chi tiết theo từng lớp (trích classification report):
+<img width="707" height="456" alt="image" src="https://github.com/user-attachments/assets/8a979ac8-0162-418d-b504-162656cb04ac" />
+
+<img width="714" height="458" alt="image" src="https://github.com/user-attachments/assets/e14712a4-5dd3-4590-a410-8f3ed07ee545" />
 
 | Mô hình | Precision (Có bệnh) | Recall (Có bệnh) | F1 (Có bệnh) |
 |---|---|---|---|
@@ -95,6 +97,8 @@ Chi tiết theo từng lớp (trích classification report):
 | Random Forest | 0.84 | 0.93 | 0.88 |
 | SVM (RBF) | 0.87 | 0.93 | 0.90 |
 | **KNN** | **0.90** | **0.93** | **0.91** |
+
+
 
 > **Insight:** KNN dẫn đầu cả về accuracy lẫn weighted-F1, đồng thời có thời gian train nhanh nhất (không có bước "học" tường minh — chỉ lưu dữ liệu). Điểm đáng chú ý hơn: **cả 4 mô hình đều đạt Recall ~0.93 cho lớp "Có bệnh"** — tức khả năng phát hiện đúng người thực sự mắc bệnh khá đồng đều, chỉ khác nhau chủ yếu ở Precision (mức độ báo động giả). Trong bối cảnh y tế, việc Recall ổn định ở mức cao trên mọi mô hình là dấu hiệu tích cực: rủi ro bỏ sót ca bệnh (false negative) tương đối thấp. Random Forest tốn thời gian train lâu nhất (gấp ~15 lần KNN) do phải xây 300 cây quyết định, nhưng đổi lại có mức chính xác ổn định và ít nhạy cảm với nhiễu hơn mô hình tuyến tính.
 
@@ -104,7 +108,9 @@ Chi tiết theo từng lớp (trích classification report):
 
 Xếp hạng 13 thuộc tính theo trị tuyệt đối hệ số tương quan Pearson với `target`, sau đó huấn luyện **Linear Regression** trên từng tập con (Top-3 / Top-6 / Top-9 / toàn bộ 13) và đo **MAE** trên tập test:
 
-<img width="710" height="456" alt="image" src="https://github.com/user-attachments/assets/e846f89a-aecf-4d33-9631-a848791649e8" />
+<img width="545" height="457" alt="image" src="https://github.com/user-attachments/assets/e84deec6-9fc9-482b-8980-8c1f0835f4b1" />
+
+<img width="637" height="455" alt="image" src="https://github.com/user-attachments/assets/59402eb8-8fcc-43af-b668-a320ac60344a" />
 
 
 > **Insight:** Top-6 feature (`thal, ca, exang, oldpeak, thalach, cp`) cho MAE **thấp nhất**, tốt hơn cả khi dùng toàn bộ 13 thuộc tính — nghĩa là **7 thuộc tính còn lại (chol, fbs, restecg, trestbps, age, sex, slope) chủ yếu đóng vai trò nhiễu** đối với bài toán hồi quy này. Đây là minh chứng thực nghiệm rõ ràng cho lợi ích của feature selection: giảm gần một nửa số chiều đầu vào nhưng mô hình vẫn tổng quát hoá tốt hơn — ít tham số hơn, nhanh hơn, và tránh overfit vào các đặc trưng không liên quan.
