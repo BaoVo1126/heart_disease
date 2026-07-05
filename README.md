@@ -1,4 +1,4 @@
-<img width="707" height="456" alt="image" src="https://github.com/user-attachments/assets/90f91405-eb2a-49e1-9ada-6b6a5fd19133" /># 🫀 Heart Disease Risk Prediction — Classification, Feature Selection & Streamlit App
+# 🫀 Heart Disease Risk Prediction — Classification, Feature Selection & Streamlit App
 
 Dataset gốc: [Heart Disease (UCI Machine Learning Repository)](https://archive.ics.uci.edu/dataset/45/heart+disease) — Cleveland Clinic Foundation, 303 bệnh nhân.
 
