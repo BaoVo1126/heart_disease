@@ -30,10 +30,10 @@ Dự án xây dựng một pipeline Machine Learning hoàn chỉnh (đọc dữ 
 
 ## ⚙️ 2. Công nghệ sử dụng
 - **Ngôn ngữ:** Python > 3.10
-- **Machine Learning cổ điển:** scikit-learn (`Pipeline`, `ColumnTransformer`, `LogisticRegression`, `RandomForestClassifier`, `SVC`, `KNeighborsClassifier`, `DecisionTreeClassifier`, `MLPClassifier`, `LinearRegression`)
-- **Deep Learning:** PyTorch (`nn.LSTM`, `nn.GRU`, `nn.Conv1d`) — huấn luyện thủ công với early stopping theo validation loss
+- **Machine Learning:** scikit-learn (`Pipeline`, `ColumnTransformer`, `LogisticRegression`, `RandomForestClassifier`, `SVC`, `KNeighborsClassifier`, `DecisionTreeClassifier`, `MLPClassifier`, `LinearRegression`)
+- **Deep Learning:** PyTorch (`nn.LSTM`, `nn.GRU`, `nn.Conv1d`)
 - **Xử lý & phân tích dữ liệu:** pandas, numpy
-- **Trực quan hoá:** matplotlib, seaborn (script), Plotly (ứng dụng Streamlit)
+- **Trực quan hoá:** matplotlib, seaborn (script), Plotly
 - **Giao diện demo:** Streamlit + streamlit-option-menu
 
 ---
@@ -44,26 +44,25 @@ Dự án xây dựng một pipeline Machine Learning hoàn chỉnh (đọc dữ 
 heart_disease/
 │
 ├── data/
-│   └── heart_disease.csv            # Dữ liệu gốc Cleveland — 303 dòng, 14 thuộc tính (dùng cho Bài 1, 2 & app)
+│   └── heart_disease.csv            
 │
-├── data_utils.py                    # Module dùng chung: đọc, làm sạch, tiền xử lý, mô tả feature
-├── bai1_classification.py           # Bài 1: huấn luyện & so sánh 4 mô hình phân loại cổ điển
-├── bai2_feature_selection.py        # Bài 2: correlation ranking + MAE theo top-k feature
-├── app.py                           # Bài 4: ứng dụng demo Streamlit (5 trang chức năng)
-├── outputs/                         # Bảng CSV + biểu đồ PNG sinh ra sau khi chạy bai1 / bai2
+├── data_utils.py                 
+├── bai1_classification.py        
+├── bai2_feature_selection.py       
+├── app.py                          
+├── outputs/                        
 ├── requirements.txt
 │
-├── code/                   # Bài 3: toàn bộ pipeline RNN/LSTM/GRU & CNN1D
-|   ├── 01_eda_preprocess.py     # EDA riêng cho bộ dữ liệu deep learning
-│   ├── 02_baseline_models.py    # 6 mô hình baseline để đối chiếu công bằng với RNN/CNN
-│   ├── 03_rnn_models.py         # 5 cấu hình RNN/LSTM/GRU (PyTorch)
-│   ├── 04_cnn_models.py         # 4 cấu hình CNN1D (PyTorch)
-│   ├── 05_analysis_compare.py   # Tổng hợp so sánh toàn bộ mô hình
-│   ├── 06_error_analysis.py     # Phân tích lỗi dự đoán chi tiết
+├── code/        
+|   ├── 01_eda_preprocess.py     
+│   ├── 02_baseline_models.py   
+│   ├── 03_rnn_models.py        
+│   ├── 04_cnn_models.py        
+│   ├── 05_analysis_compare.py   
+│   ├── 06_error_analysis.py     
 |
-├── dl_models.py                 # Định nghĩa kiến trúc RNNClassifier/CNN1DClassifier để nạp lại .pt (dùng bởi app.py)
-│
-└── reports/                          # Báo cáo & slide thuyết trình đầy đủ (docx/pdf/pptx)
+└── dl_models.py                
+                    
 ```
 ---
 
@@ -105,7 +104,7 @@ Sau khi làm sạch dữ liệu (điền missing value ở `ca`/`thal` bằng me
 | SVM (RBF) | 0.87 | 0.93 | 0.90 |
 | **KNN** | **0.90** | **0.93** | **0.91** |
 
-> **Insight:** KNN dẫn đầu cả về accuracy lẫn weighted-F1, đồng thời có thời gian train nhanh nhất (không có bước "học" tường minh — chỉ lưu dữ liệu). Điểm đáng chú ý hơn: **cả 4 mô hình đều đạt Recall ~0.93 cho lớp "Có bệnh"** — tức khả năng phát hiện đúng người thực sự mắc bệnh khá đồng đều, chỉ khác nhau chủ yếu ở Precision (mức độ báo động giả). Trong bối cảnh y tế, việc Recall ổn định ở mức cao trên mọi mô hình là dấu hiệu tích cực: rủi ro bỏ sót ca bệnh (false negative) tương đối thấp. Random Forest tốn thời gian train lâu nhất (gấp ~15 lần KNN) do phải xây 300 cây quyết định, nhưng đổi lại có mức chính xác ổn định và ít nhạy cảm với nhiễu hơn mô hình tuyến tính.
+> **Insight:** KNN dẫn đầu cả về accuracy lẫn weighted-F1, đồng thời có thời gian train nhanh nhất (không có bước "học" tường minh — chỉ lưu dữ liệu). Điểm đáng chú ý hơn: **cả 4 mô hình đều đạt Recall ~0.93 cho lớp "Có bệnh"** — tức khả năng phát hiện đúng người thực sự mắc bệnh khá đồng đều, chỉ khác nhau chủ yếu ở Precision (mức độ báo động giả). Trong bối cảnh y tế, việc Recall ổn định ở mức cao trên mọi mô hình là dấu hiệu tích cực: rủi ro bỏ sót ca bệnh (false negative) tương đối thấp. Random Forest tốn thời gian train lâu nhất do phải xây 300 cây quyết định, nhưng đổi lại có mức chính xác ổn định và ít nhạy cảm với nhiễu hơn mô hình tuyến tính.
 
 ---
 
