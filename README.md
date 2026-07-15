@@ -14,8 +14,7 @@ Dataset gốc: [Heart Disease (UCI Machine Learning Repository)](https://archive
 6.  [Bài 2 — Feature Selection theo Correlation](#-6-bài-2--feature-selection-theo-correlation)
 7.  [Bài 3 — Deep Learning: RNN/LSTM/GRU & CNN1D](#-7-bài-3--deep-learning-rnnlstmgru--cnn1d)
 8.  [Ứng dụng demo Streamlit](#️-9-ứng-dụng-demo-streamlit)
-9.  [Bài học rút ra & hướng phát triển](#-10-bài-học-rút-ra--hướng-phát-triển)
-10.  [Cài đặt & chạy dự án](#-11-cài-đặt--chạy-dự-án)
+9.  [Cài đặt & chạy dự án](#-11-cài-đặt--chạy-dự-án)
 
 ---
 
@@ -163,25 +162,6 @@ Chạy bằng lệnh:
 ```bash
 streamlit run app.py
 ```
-
----
-
-##  9. Bài học rút ra & hướng phát triển
-**Những gì đã làm được:**
-
-- Xây dựng pipeline ML end-to-end tái sử dụng được (`data_utils.py` dùng chung cho Bài 1, 2 và app), tránh lặp code xử lý dữ liệu.
-- Thiết kế tiền xử lý đúng chuẩn scikit-learn (`ColumnTransformer` trong `Pipeline`), loại bỏ hoàn toàn rủi ro data leakage giữa numeric scaling và categorical encoding.
-- So sánh định lượng 4 thuật toán phân loại cổ điển trên đủ 6 tiêu chí (accuracy, precision/recall/f1 từng lớp, weighted-F1, thời gian train/test), và mở rộng so sánh công bằng với 9 mô hình deep learning (RNN/LSTM/GRU, CNN1D) ở Bài 3.
-- Chứng minh bằng thực nghiệm rằng **feature selection theo correlation giúp giảm gần 50% số chiều dữ liệu mà MAE vẫn tốt hơn dùng toàn bộ**, và rằng **deep learning không vượt trội baseline trên dữ liệu bảng nhỏ (303 dòng)** — kèm phân tích overfitting định lượng để giải thích vì sao.
-- Đóng gói toàn bộ thành một sản phẩm demo tương tác duy nhất, có insight tự động tính toán thay vì text tĩnh, và cho phép dự đoán trực tiếp bằng cả mô hình cổ điển lẫn deep learning.
-
-**Hạn chế & hướng phát triển tiếp theo:**
-
-- Bộ dữ liệu chỉ có 303 dòng — khá nhỏ so với chuẩn thực tế, đặc biệt bất lợi cho deep learning; hướng mở rộng là gộp thêm 3 bộ Heart Disease khác cùng họ UCI (Hungary, Switzerland, VA Long Beach — tổng cộng 920 dòng) để tăng độ tin cậy thống kê và cho RNN/CNN đủ dữ liệu phát huy lợi thế.
-- Chưa thực hiện hyperparameter tuning có hệ thống (`GridSearchCV`/`RandomizedSearchCV`/Optuna) cho cả 2 nhóm mô hình — hiện dùng tham số mặc định/thủ công hợp lý.
-- Có thể thử thêm Gradient Boosting/XGBoost cho nhóm cổ điển, và kiến trúc Transformer/1D-attention cho nhóm deep learning để đối chiếu thêm.
-- Feature selection mới dừng ở phương pháp filter (correlation); hướng mở rộng tự nhiên là so sánh thêm với phương pháp wrapper (RFE) hoặc embedded (feature_importances_ của Random Forest) để đối chiếu độ nhất quán giữa các cách chọn đặc trưng.
-- Việc quy đổi encoding giữa 2 bộ dữ liệu ở trang demo deep learning là suy đoán hợp lý dựa trên tài liệu UCI, chưa được xác thực chính thức — hướng phát triển tiếp theo nên thống nhất một pipeline tiền xử lý dùng chung cho toàn bộ dự án.
 
 ---
 
