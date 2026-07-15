@@ -53,24 +53,15 @@ heart_disease/
 ├── outputs/                         # Bảng CSV + biểu đồ PNG sinh ra sau khi chạy bai1 / bai2
 ├── requirements.txt
 │
-├── deep_learning/                   # Bài 3: toàn bộ pipeline RNN/LSTM/GRU & CNN1D
-│   ├── code/
-│   │   ├── 01_eda_preprocess.py     # EDA riêng cho bộ dữ liệu deep learning
-│   │   ├── 02_baseline_models.py    # 6 mô hình baseline để đối chiếu công bằng với RNN/CNN
-│   │   ├── 03_rnn_models.py         # 5 cấu hình RNN/LSTM/GRU (PyTorch)
-│   │   ├── 04_cnn_models.py         # 4 cấu hình CNN1D (PyTorch)
-│   │   ├── 05_analysis_compare.py   # Tổng hợp so sánh toàn bộ mô hình
-│   │   ├── 06_error_analysis.py     # Phân tích lỗi dự đoán chi tiết
-│   │   └── build_notebook.py        # Script sinh ra notebook/Heart_Disease_RNN_CNN.ipynb
-│   ├── dl_models.py                 # Định nghĩa kiến trúc RNNClassifier/CNN1DClassifier để nạp lại .pt (dùng bởi app.py)
-│   ├── data/
-│   │   ├── heart.csv                # Bộ dữ liệu Cleveland (đã số-hoá lại) dùng cho Bài 3
-│   │   └── splits.npz                # Train/val/test đã chia sẵn (60/20/20), dùng chung mọi mô hình deep learning
-│   ├── models/                       # Mô hình đã huấn luyện (.pkl cho baseline, .pt cho PyTorch, scaler.pkl)
-│   ├── figures/                      # Biểu đồ EDA, learning curves, confusion matrix, so sánh
-│   ├── results/                      # Kết quả JSON/CSV (metrics, so sánh, phân tích lỗi/overfitting)
-│   └── notebook/
-│       └── Heart_Disease_RNN_CNN.ipynb   # Notebook chạy toàn bộ pipeline Bài 3 từ đầu đến cuối
+├── code/                   # Bài 3: toàn bộ pipeline RNN/LSTM/GRU & CNN1D
+|   ├── 01_eda_preprocess.py     # EDA riêng cho bộ dữ liệu deep learning
+│   ├── 02_baseline_models.py    # 6 mô hình baseline để đối chiếu công bằng với RNN/CNN
+│   ├── 03_rnn_models.py         # 5 cấu hình RNN/LSTM/GRU (PyTorch)
+│   ├── 04_cnn_models.py         # 4 cấu hình CNN1D (PyTorch)
+│   ├── 05_analysis_compare.py   # Tổng hợp so sánh toàn bộ mô hình
+│   ├── 06_error_analysis.py     # Phân tích lỗi dự đoán chi tiết
+|
+├── dl_models.py                 # Định nghĩa kiến trúc RNNClassifier/CNN1DClassifier để nạp lại .pt (dùng bởi app.py)
 │
 └── reports/                          # Báo cáo & slide thuyết trình đầy đủ (docx/pdf/pptx)
 ```
